@@ -1,0 +1,27 @@
+### 1.
+GET {{host}}user
+
+### 2.
+GET {{host}}user/info
+Cookie: {{cookie}}
+
+### 3.
+POST {{host}}user/login
+Content-Type: application/json
+
+{
+    "username": "zhangsan",
+    "password": "123456"
+}
+
+> {%client.global.set("cookie", response.headers.valueOf("Set-Cookie"));%}
+
+### 4.
+POST {{host}}user/register
+Content-Type: application/json
+
+{
+    "username": "zhangsan",
+    "password": "123456",
+    "password2": "123456"
+}
