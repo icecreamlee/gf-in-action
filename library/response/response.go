@@ -27,6 +27,11 @@ func Json(r *ghttp.Request, code int, message string, data ...interface{}) {
 	})
 }
 
+// JsonWithError 返回标准JSON数据。
+func JsonWithError(r *ghttp.Request, err error, data ...interface{}) {
+	Json(r, ErrCode(err), ErrMsg(err), data...)
+}
+
 // JsonExit 返回标准JSON数据并退出当前HTTP执行函数。
 func JsonExit(r *ghttp.Request, code int, message string, data ...interface{}) {
 	Json(r, code, message, data...)

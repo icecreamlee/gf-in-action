@@ -17,6 +17,10 @@ Content-Type: application/json
 > {%client.global.set("cookie", response.headers.valueOf("Set-Cookie"));%}
 
 ### 4.
+POST {{host}}user/logout
+Cookie: {{cookie}}
+
+### 5.
 POST {{host}}user/register
 Content-Type: application/json
 

@@ -26,13 +26,13 @@ func (u userApi) Info(r *ghttp.Request) {
 	uid := r.Session.GetInt("uid")
 	user, err := service.User.UserInfo(uid)
 	if err != nil {
-		response.Json(r, 1, err.Error())
+		response.Json(r, define.ErrCodeDefault, err.Error())
 		return
 	}
 
 	userRes := &define.UserInfoRes{}
 	_ = copier.Copy(userRes, user)
-	response.Json(r, 0, "success", g.Map{"user": userRes})
+	response.JsonWithError(r, nil, g.Map{"user": userRes})
 }
 
 // Login 用户登录接口
@@ -40,18 +40,16 @@ func (u *userApi) Login(r *ghttp.Request) {
 	req := &define.UserLoginReq{}
 	_ = r.Parse(req)
 	if e := gvalid.CheckStruct(req, nil); e != nil {
-		response.Json(r, 1, e.FirstString())
+		response.Json(r, define.ErrCodeFormValidation, e.FirstString())
 		return
 	}
 
 	user, err := service.User.Login(req.Username, req.Password)
-	if err != nil {
-		response.Json(r, 1, err.Error())
-		return
+	if user != nil {
+		_ = r.Session.Set("uid", user.Id)
 	}
 
-	_ = r.Session.Set("uid", user.Id)
-	response.Json(r, 0, "success")
+	response.JsonWithError(r, err)
 }
 
 // Register 用户注册接口
@@ -59,19 +57,14 @@ func (u *userApi) Register(r *ghttp.Request) {
 	req := &define.UserRegisterReq{}
 	_ = r.Parse(req)
 	if e := gvalid.CheckStruct(req, nil); e != nil {
-		response.Json(r, 1, e.FirstString(), req)
+		response.Json(r, define.ErrCodeFormValidation, e.FirstString(), req)
 		return
 	}
-
-	err := service.User.Register(req.Username, req.Password)
-	if err != nil {
-		response.Json(r, 1, err.Error())
-		return
-	}
-	response.Json(r, 0, "success")
+	response.JsonWithError(r, service.User.Register(req.Username, req.Password))
 }
 
 // Logout 用户退出登录接口
 func (u *userApi) Logout(r *ghttp.Request) {
-	response.Json(r, 0, "logout")
+	_ = r.Session.Clear()
+	response.JsonWithError(r, nil)
 }

@@ -10,9 +10,3 @@ type UserRegisterReq struct {
 	Password  string `json:"password" v:"password@password|same:password2"`
 	Password2 string `json:"password2" v:"password2@password|same:password#||两次密码不一致，请重新输入"`
 }
-
-type UserInfoRes struct {
-	Id       uint   `json:"id"`       //
-	Username string `json:"username"` //
-	Email    string `json:"email"`    //
-}
