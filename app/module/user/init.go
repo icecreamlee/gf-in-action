@@ -12,6 +12,7 @@ import (
 	"github.com/gogf/gf/os/gcron"
 )
 
+// init 初始化当前系统模块中需要的运行参数，如设置路由
 func init() {
 	if common.RunMode == common.RunModeCLI {
 		setCMDRouter()
