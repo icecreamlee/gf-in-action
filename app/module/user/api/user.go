@@ -1,8 +1,8 @@
 package api
 
 import (
-	"gf-in-action/app/user/define"
-	"gf-in-action/app/user/service"
+	"gf-in-action/app/module/user/define"
+	"gf-in-action/app/module/user/service"
 	"gf-in-action/library/response"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"

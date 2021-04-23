@@ -18,10 +18,8 @@ func init() {
 	}
 
 	// 设置项目环境
-	if gcmd.ContainsOpt("env") {
-		_ = os.Setenv("SMS_GO_ENV", gcmd.GetOpt("env", common.ENVProd))
-	}
-	common.ENV = os.Getenv("SMS_GO_ENV")
+	_ = os.Setenv("GF_IN_ACTION_ENV", gcmd.GetOpt("env", common.ENVDev))
+	common.ENV = os.Getenv("GF_IN_ACTION_ENV")
 
 	// 设置配置文件
 	g.Cfg().SetFileName("config_" + common.ENV + ".toml")

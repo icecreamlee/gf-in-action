@@ -1,7 +1,7 @@
 package service
 
 import (
-	"gf-in-action/app/user/define"
+	"gf-in-action/app/module/user/define"
 	"gf-in-action/library/response"
 	"github.com/gogf/gf/net/ghttp"
 )

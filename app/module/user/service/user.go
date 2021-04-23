@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"gf-in-action/app/dao"
 	"gf-in-action/app/model"
-	"gf-in-action/app/user/define"
+	"gf-in-action/app/module/user/define"
 	"gf-in-action/library/utils"
 	"github.com/gogf/gf/errors/gerror"
 )
