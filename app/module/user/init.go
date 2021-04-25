@@ -1,11 +1,12 @@
 package user
 
 import (
-	"gf-in-action/app/common"
 	"gf-in-action/app/module/user/api"
 	"gf-in-action/app/module/user/cli"
 	"gf-in-action/app/module/user/cron"
 	"gf-in-action/app/module/user/service"
+	"gf-in-action/boot"
+	"gf-in-action/library/constant"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gcmd"
@@ -14,7 +15,7 @@ import (
 
 // init 初始化当前系统模块中需要的运行参数，如设置路由
 func init() {
-	if common.RunMode == common.RunModeCLI {
+	if boot.RunMode == constant.RunModeCLI {
 		setCMDRouter()
 		return
 	}

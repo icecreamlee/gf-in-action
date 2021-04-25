@@ -1,15 +1,16 @@
-package router
+package app
 
 import (
-	"gf-in-action/app/common"
 	_ "gf-in-action/app/module/user"
+	"gf-in-action/boot"
+	"gf-in-action/library/constant"
 	"gf-in-action/library/response"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 )
 
 func init() {
-	if common.RunMode == common.RunModeWeb {
+	if boot.RunMode == constant.RunModeWeb {
 		s := g.Server()
 		s.BindStatusHandler(404, func(r *ghttp.Request) {
 			_ = r.Response.WriteJson(response.JsonRes{
